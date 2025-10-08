@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://djrcjsr618m5c"]
+
+[ext_resource type="Texture2D" uid="uid://dhm5jtdtyrl7n" path="res://simple-ping-pong-2Dgame-assets/arts/Computer.png" id="1_reog3"]
+
+[sub_resource type="GDScript" id="GDScript_reog3"]
+script/source = "extends CharacterBody2D
+
+@export var speed: float = 350.0
+var ball: Node = null
+
+func _physics_process(delta: float):
+	if ball == null:
+		ball = get_tree().get_first_node_in_group(\"ball\")
+	if ball:
+		var target_y = ball.global_position.y
+		if global_position.y < target_y - 10:
+			velocity.y = speed
+		elif global_position.y > target_y + 10:
+			velocity.y = -speed
+		else:
+			velocity.y = 0
+	move_and_slide()
+	
+func _on_area_2d_area_entered(area):
+	if area.get_parent() is RigidBody2D:
+		var ball = area.get_parent()
+		var normal = (ball.global_position - global_position).normalized()
+		ball.linear_velocity = ball.linear_velocity.bounce(normal).normalized() * 300.0
+"
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_reog3"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f3ahy"]
+size = Vector2(17, 120)
+
+[node name="AI" type="CharacterBody2D"]
+script = SubResource("GDScript_reog3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_reog3")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_reog3")
+gravity_scale = 0.0
+linear_damp_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_f3ahy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_f3ahy")

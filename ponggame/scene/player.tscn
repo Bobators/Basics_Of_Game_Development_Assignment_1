@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://kd5wnm3hflrn"]
+
+[ext_resource type="Script" uid="uid://bkjpsme11wvg4" path="res://player.gd" id="1_hjaqi"]
+[ext_resource type="Texture2D" uid="uid://ckavhpls5v73t" path="res://simple-ping-pong-2Dgame-assets/arts/Player.png" id="1_xo3ru"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hjaqi"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hjaqi"]
+size = Vector2(120, 17)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_hjaqi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xo3ru")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_hjaqi")
+gravity_scale = 0.0
+linear_damp_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(0, -1)
+rotation = 1.56499
+shape = SubResource("RectangleShape2D_hjaqi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+rotation = 1.56499
+shape = SubResource("RectangleShape2D_hjaqi")

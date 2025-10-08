@@ -1,0 +1,98 @@
+[gd_scene load_steps=11 format=3 uid="uid://dr6r440figiw"]
+
+[ext_resource type="Script" uid="uid://dkqpiek8mhdl8" path="res://scene/game.gd" id="1_p1ry8"]
+[ext_resource type="PackedScene" uid="uid://j4tdl7dmsi6k" path="res://scene/ball.tscn" id="1_xwcet"]
+[ext_resource type="PackedScene" uid="uid://o7nit1fkxys7" path="res://scene/background.tscn" id="2_p1ry8"]
+[ext_resource type="PackedScene" uid="uid://kd5wnm3hflrn" path="res://scene/player.tscn" id="3_xlg7c"]
+[ext_resource type="PackedScene" uid="uid://djrcjsr618m5c" path="res://scene/ai.tscn" id="4_qpk70"]
+[ext_resource type="Script" uid="uid://csvl12t62li8b" path="res://scene/ai.gd" id="5_p1ry8"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_p1ry8"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ll5lq"]
+size = Vector2(801.5, 20)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xlg7c"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_17rxn"]
+size = Vector2(20, 476)
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_p1ry8")
+
+[node name="playerLabel" type="Label" parent="."]
+z_index = 1
+offset_left = 15.0
+offset_top = -219.0
+offset_right = 102.0
+offset_bottom = -193.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="aierLabel" type="Label" parent="."]
+z_index = 1
+offset_left = -100.0
+offset_top = -219.0
+offset_right = -13.0
+offset_bottom = -193.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ball" parent="." groups=["ball"] instance=ExtResource("1_xwcet")]
+
+[node name="Background" parent="." instance=ExtResource("2_p1ry8")]
+z_index = -1
+
+[node name="AI" parent="." instance=ExtResource("4_qpk70")]
+position = Vector2(-278, 0)
+script = ExtResource("5_p1ry8")
+speed = 300.0
+
+[node name="Player" parent="." instance=ExtResource("3_xlg7c")]
+position = Vector2(289, 0)
+
+[node name="wall" type="Node2D" parent="."]
+
+[node name="bottom" type="StaticBody2D" parent="wall"]
+position = Vector2(-1, -226)
+physics_material_override = SubResource("PhysicsMaterial_p1ry8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall/bottom"]
+position = Vector2(2, 464)
+shape = SubResource("RectangleShape2D_ll5lq")
+
+[node name="top" type="StaticBody2D" parent="wall"]
+position = Vector2(-1, -226)
+physics_material_override = SubResource("PhysicsMaterial_xlg7c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall/top"]
+position = Vector2(2, 36)
+shape = SubResource("RectangleShape2D_ll5lq")
+
+[node name="scorearea" type="Node2D" parent="."]
+
+[node name="left" type="Area2D" parent="scorearea"]
+position = Vector2(-401, 4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="scorearea/left"]
+position = Vector2(-11, 4)
+shape = SubResource("RectangleShape2D_17rxn")
+
+[node name="right" type="Area2D" parent="scorearea"]
+position = Vector2(427, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="scorearea/right"]
+position = Vector2(-18, 6)
+shape = SubResource("RectangleShape2D_17rxn")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.25, 1.25)
+
+[connection signal="body_entered" from="scorearea/left" to="." method="_on_left_goal_body_entered"]
+[connection signal="body_entered" from="scorearea/right" to="." method="_on_right_goal_body_entered"]
