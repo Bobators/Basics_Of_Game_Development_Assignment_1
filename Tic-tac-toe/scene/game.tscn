@@ -1,0 +1,73 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2vcxngyhcm12"]
+
+[ext_resource type="Script" uid="uid://cbvv6aamcstle" path="res://scene/game.gd" id="1_5kiuu"]
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_5kiuu")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 90.0
+offset_top = 90.0
+offset_right = 638.0
+offset_bottom = 638.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 3
+
+[node name="Button" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+
+[node name="Button2" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+
+[node name="Button3" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+
+[node name="Button4" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+
+[node name="Button5" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+
+[node name="Button6" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+
+[node name="Button7" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+
+[node name="Button8" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+
+[node name="Button9" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
