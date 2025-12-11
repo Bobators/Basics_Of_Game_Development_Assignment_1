@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7uy264eeskmo"]
+
+[ext_resource type="Script" uid="uid://ccglvwkeh0hgw" path="res://Hpleft.gd" id="1_62e2m"]
+[ext_resource type="Texture2D" uid="uid://dm1ce5yucndnb" path="res://assets/fire_knight.png" id="2_62e2m"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ee4bf"]
+
+[node name="Control" type="Control"]
+layout_direction = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_62e2m")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -368.0
+offset_bottom = 64.0
+grow_horizontal = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_62e2m")
+stretch_mode = 4
+flip_h = true
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 2
+value = 100.0
+fill_mode = 1
+nine_patch_stretch = true
+texture_progress = SubResource("CanvasTexture_ee4bf")
+tint_progress = Color(1, 0, 0, 0.627451)

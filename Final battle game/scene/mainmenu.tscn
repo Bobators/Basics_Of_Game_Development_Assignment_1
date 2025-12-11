@@ -1,0 +1,169 @@
+[gd_scene load_steps=6 format=3 uid="uid://dc5seemqnhkfe"]
+
+[ext_resource type="FontFile" uid="uid://d3w2wjvyrb7nw" path="res://Karma Future.otf" id="1_h8uk4"]
+[ext_resource type="Script" uid="uid://c6u6dlk4q03a0" path="res://script/mainmenu.gd" id="1_n5p00"]
+[ext_resource type="Texture2D" uid="uid://7wrpq4lhdpen" path="res://assets/BG.png" id="2_n5p00"]
+[ext_resource type="AudioStream" uid="uid://l835gyfy7ghu" path="res://assets/DavidKBD - Interstellar vol2 06 - Red Dwarf.ogg" id="4_eekkd"]
+
+[sub_resource type="Theme" id="Theme_eekkd"]
+
+[node name="Mainmenu" type="Node2D"]
+script = ExtResource("1_n5p00")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 1920.0
+offset_bottom = 500.0
+theme_override_fonts/font = ExtResource("1_h8uk4")
+theme_override_font_sizes/font_size = 300
+text = "Betrayal"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+offset_top = 500.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme = SubResource("Theme_eekkd")
+
+[node name="Mainbuttons" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Play" type="Button" parent="CenterContainer/Mainbuttons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_h8uk4")
+theme_override_font_sizes/font_size = 75
+text = "Play"
+
+[node name="settings" type="Button" parent="CenterContainer/Mainbuttons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_h8uk4")
+theme_override_font_sizes/font_size = 75
+text = "Settings
+"
+
+[node name="credits" type="Button" parent="CenterContainer/Mainbuttons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_h8uk4")
+theme_override_font_sizes/font_size = 75
+text = "Credits"
+
+[node name="Quit" type="Button" parent="CenterContainer/Mainbuttons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_h8uk4")
+theme_override_font_sizes/font_size = 75
+text = "Quit"
+
+[node name="settingsmenu" type="VBoxContainer" parent="CenterContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="back" type="Button" parent="CenterContainer/settingsmenu"]
+custom_minimum_size = Vector2(353, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_h8uk4")
+theme_override_font_sizes/font_size = 75
+text = "BACK"
+
+[node name="Fullscreen" type="CheckBox" parent="CenterContainer/settingsmenu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_h8uk4")
+theme_override_font_sizes/font_size = 75
+text = "FULLSCREEN"
+
+[node name="volslider" type="HSlider" parent="CenterContainer/settingsmenu"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+
+[node name="Label" type="Label" parent="CenterContainer/settingsmenu/volslider"]
+custom_minimum_size = Vector2(484, 55)
+layout_mode = 0
+offset_top = -16.0
+offset_right = 484.0
+offset_bottom = 39.0
+theme_override_fonts/font = ExtResource("1_h8uk4")
+theme_override_font_sizes/font_size = 40
+text = "MAIN VOLUME"
+horizontal_alignment = 1
+
+[node name="Musicslider" type="HSlider" parent="CenterContainer/settingsmenu"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+
+[node name="Label" type="Label" parent="CenterContainer/settingsmenu/Musicslider"]
+custom_minimum_size = Vector2(484, 55)
+layout_mode = 0
+offset_top = -16.0
+offset_right = 484.0
+offset_bottom = 39.0
+theme_override_fonts/font = ExtResource("1_h8uk4")
+theme_override_font_sizes/font_size = 40
+text = "MUSIC VOLUME"
+horizontal_alignment = 1
+
+[node name="SFXslider" type="HSlider" parent="CenterContainer/settingsmenu"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+
+[node name="Label" type="Label" parent="CenterContainer/settingsmenu/SFXslider"]
+custom_minimum_size = Vector2(484, 55)
+layout_mode = 0
+offset_top = -16.0
+offset_right = 484.0
+offset_bottom = 39.0
+theme_override_fonts/font = ExtResource("1_h8uk4")
+theme_override_font_sizes/font_size = 40
+text = "SFX VOLUME"
+horizontal_alignment = 1
+
+[node name="creditsmenu" type="VBoxContainer" parent="CenterContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="CenterContainer/creditsmenu"]
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_h8uk4")
+theme_override_font_sizes/font_size = 120
+text = "A Game  by Batman"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="back" type="Button" parent="CenterContainer/creditsmenu"]
+custom_minimum_size = Vector2(353, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_h8uk4")
+theme_override_font_sizes/font_size = 75
+text = "BACK"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -4096
+position = Vector2(957, 472)
+scale = Vector2(1.25195, 1.19287)
+texture = ExtResource("2_n5p00")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(950, 475)
+zoom = Vector2(0.35, 0.35)
+
+[node name="MMBGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_eekkd")
+volume_db = -10.0
+autoplay = true
+
+[connection signal="pressed" from="CenterContainer/Mainbuttons/Play" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="CenterContainer/Mainbuttons/settings" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="CenterContainer/Mainbuttons/credits" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="CenterContainer/Mainbuttons/Quit" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="CenterContainer/settingsmenu/back" to="." method="_on_settings_back_button_pressed"]
+[connection signal="pressed" from="CenterContainer/creditsmenu/back" to="." method="_on_credits_back_button_pressed"]

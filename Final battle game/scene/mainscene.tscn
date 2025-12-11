@@ -1,0 +1,116 @@
+[gd_scene load_steps=14 format=3 uid="uid://ctao4q0lxwk16"]
+
+[ext_resource type="PackedScene" uid="uid://1muh1qw6n4dr" path="res://control2.tscn" id="1_j2iek"]
+[ext_resource type="Texture2D" uid="uid://070v2ccldm3q" path="res://assets/mountain-cavern-exteriors_0106.png" id="1_siadl"]
+[ext_resource type="PackedScene" uid="uid://b7uy264eeskmo" path="res://control.tscn" id="1_uwngr"]
+[ext_resource type="Script" uid="uid://pkn3r1ggohp0" path="res://HpRight.gd" id="2_8ajfr"]
+[ext_resource type="PackedScene" uid="uid://bv7inyt6de1f6" path="res://scene/boss.tscn" id="3_uwngr"]
+[ext_resource type="PackedScene" uid="uid://dv03rk3c272yt" path="res://scene/wind_Assassin.tscn" id="3_wx3ht"]
+[ext_resource type="AudioStream" uid="uid://bso7ipttnl8qm" path="res://assets/DavidKBD - Interstellar vol2 01 - Meteor Shower.ogg" id="7_nx0of"]
+[ext_resource type="Script" uid="uid://bqv347ssvaefx" path="res://script/victory.gd" id="8_nx0of"]
+[ext_resource type="FontFile" uid="uid://d3w2wjvyrb7nw" path="res://Karma Future.otf" id="8_oxmnm"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4ulk4"]
+distance = -300.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wx3ht"]
+distance = -231.667
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uwngr"]
+distance = -561.667
+
+[sub_resource type="LabelSettings" id="LabelSettings_oxmnm"]
+
+[node name="Mainscene" type="Node2D"]
+
+[node name="HpLeft" parent="." node_paths=PackedStringArray("victory_manager_node", "target_player") instance=ExtResource("1_j2iek")]
+offset_left = -380.0
+offset_top = -215.0
+offset_right = -380.0
+offset_bottom = -215.0
+victory_manager_node = NodePath("../End/Victory")
+target_player = NodePath("../Hero")
+
+[node name="HpRight" parent="." node_paths=PackedStringArray("victory_manager_node", "target_player") instance=ExtResource("1_uwngr")]
+offset_left = -52.0
+offset_top = -215.0
+offset_right = -12.0
+offset_bottom = -175.0
+script = ExtResource("2_8ajfr")
+victory_manager_node = NodePath("../End/Victory")
+target_player = NodePath("../Boss")
+
+[node name="BattleBG" type="Sprite2D" parent="."]
+z_index = -4096
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_siadl")
+
+[node name="floor" type="StaticBody2D" parent="BattleBG"]
+disable_mode = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BattleBG/floor"]
+shape = SubResource("WorldBoundaryShape2D_4ulk4")
+
+[node name="left_boundary" type="StaticBody2D" parent="BattleBG"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BattleBG/left_boundary"]
+position = Vector2(-408.333, 201.667)
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_wx3ht")
+
+[node name="right_boundary" type="StaticBody2D" parent="BattleBG"]
+position = Vector2(76.6667, 11.6667)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BattleBG/right_boundary"]
+rotation = -1.5708
+shape = SubResource("WorldBoundaryShape2D_uwngr")
+
+[node name="Hero" parent="." instance=ExtResource("3_wx3ht")]
+position = Vector2(-236, 110)
+
+[node name="Boss" parent="." instance=ExtResource("3_uwngr")]
+position = Vector2(208, 107)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(-4.96, 4.04)
+offset = Vector2(-384, -216)
+limit_left = 0
+limit_top = 0
+limit_right = 768
+limit_bottom = 432
+position_smoothing_enabled = true
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_nx0of")
+volume_db = -10.0
+autoplay = true
+
+[node name="End" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Victory" type="Label" parent="End"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_oxmnm")
+theme_override_font_sizes/font_size = 64
+label_settings = SubResource("LabelSettings_oxmnm")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("8_nx0of")
+
+[node name="Restart" type="Button" parent="End"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_oxmnm")
+theme_override_font_sizes/font_size = 64
+text = "Restart"
+
+[connection signal="pressed" from="End/Restart" to="End/Victory" method="_on_restart_button_pressed"]
